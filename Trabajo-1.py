@@ -1,26 +1,30 @@
-def ingreso(coordenadas, option, barcos):
+def ingreso(coordenadas, option):
+    letra = input("ingresa la letra de la columna donde desea disparar: ")
+    while letra.upper() not in "ABCD":
+        print("Ingreso invalido, ingrese una la letra valida: (A, B, C, D)")
+        letra = input("ingresa la letra de la columna donde desea dispara:r ")
+    letra = letra.upper()
+
+    numero = input("ingresa el numero de la fila donde desea disparar: ")
+    while numero not in "123":
+        print("Ingreso invalido, ingrese un numero valido: (1, 2, 3)")
+        numero = input("ingresa el numero de la fila donde desea disparar: ")
+    coordenada = letra+numero
+    if coordenada not in coordenadas:
+        coordenadas.append(coordenada)
+        option == "N"
+    else:
+        print("Ya disparaste a esta celda, no puedes repetir la coordenada de disparo, intente de nuevo")
+        option =="Y"
+        return coordenada
+
+def cuerpo(coordenadas, option, barcos):
     disparos = 0
     contador = 0
     while contador < 3:
         while option == "Y":
-            letra = input("ingresa la letra de la columna donde desea disparar: ")
-            while letra.upper() not in "ABCD":
-                print("Ingreso invalido, ingrese una la letra valida: (A, B, C, D)")
-                letra = input("ingresa la letra de la columna donde desea dispara:r ")
-            letra = letra.upper()
-
-            numero = input("ingresa el numero de la fila donde desea disparar: ")
-            while numero not in "123":
-                print("Ingreso invalido, ingrese un numero valido: (1, 2, 3)")
-                numero = input("ingresa el numero de la fila donde desea disparar: ")
-            coordenada = letra+numero
-            if coordenada not in coordenadas:
-                coordenadas.append(coordenada)
-                option == "N"
-                break
-            else:
-                print("Ya disparaste a esta celda, no puedes repetir la coordenada de disparo, intente de nuevo")
-                option =="Y"  
+            ingreso(coordenadas, option)
+        coordenada = ingreso(coordenadas, option)
         if coordenada in barcos:
             print("¡Hundiste el acorazado!")
             contador += 1
@@ -43,6 +47,6 @@ def main():
     coordenadas = []
     option = "Y"
     tabla()
-    ingreso(coordenadas, option, barcos)
+    cuerpo(coordenadas, option, barcos)
 
 main()
